@@ -1,0 +1,138 @@
+# Omakase Ruby styling for Rails
+inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+# Overwrite or add rules to create your own house style
+# Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
+Layout/SpaceInsideArrayLiteralBrackets:
+  Enabled: false
+AllCops:
+  TargetRubyVersion: 3.3
+  NewCops: enable
+  Include:
+    - app/**/*.rb
+    - lib/**/*.rb
+    - spec/**/*.rb
+  Exclude:
+    - bin/**/*
+    - node_modules/**/*
+    - vendor/**/*
+    - config/environments/development.rb
+    - config/environments/production.rb
+    - spec/**/*_spec.rb
+    - config/**/*.rb
+
+plugins:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-rspec
+  - rubocop-capybara
+  - rubocop-factory_bot
+  - rubocop-rspec_rails
+
+Rails:
+  Enabled: true
+
+Rails/HttpPositionalArguments:
+  Enabled: true
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Rails/LexicallyScopedActionFilter:
+  Exclude:
+    - app/controllers/users/*.rb
+
+Layout/LineLength:
+  Max: 100
+  Exclude:
+    - config/initializers/simple_form_bootstrap.rb
+    - config/initializers/simple_form.rb
+    - config/routes.rb
+    - "Gemfile"
+
+Layout/LineContinuationSpacing:
+  Enabled: false
+
+Layout/LineContinuationLeadingSpace:
+  Enabled: false
+
+Lint/MissingSuper:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*.rb"
+    - config/routes.rb
+    - config/environments/production.rb
+
+Metrics/ClassLength:
+  Max: 150
+
+Metrics/MethodLength:
+  Max: 25
+  Exclude:
+    - "spec/**/*"
+
+Metrics/ModuleLength:
+  Max: 200
+
+Naming/FileName:
+  Exclude:
+    - "Gemfile"
+
+Metrics/ParameterLists:
+  Max: 7
+
+Naming/RescuedExceptionsVariableName:
+  Enabled: false
+
+Performance/Casecmp:
+  Enabled: true
+
+Performance/RedundantMerge:
+  Enabled: true
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/AccessModifierDeclarations:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Enabled: false
+
+Style/ExponentialNotation:
+  Enabled: true
+
+Style/Documentation:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Style/MethodDefParentheses:
+  Enabled: true
+  EnforcedStyle: require_parentheses
+
+Style/MethodCallWithArgsParentheses:
+  Enabled: true
+
+Style/NestedParenthesizedCalls:
+  Enabled: true
+
+Style/NegatedIf:
+  Enabled: true
+
+Style/ParallelAssignment:
+  Enabled: true
+
+Style/SingleArgumentDig:
+  Enabled: false
