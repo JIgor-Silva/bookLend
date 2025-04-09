@@ -1,0 +1,115 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  scan_ruby:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Run Brakeman for security scan
+        run: bin/brakeman --no-pager
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Lint code with RuboCop
+        run: |
+          bin/rubocop -f github
+
+  test_and_coverage:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: 4421
+        ports:
+          - 5432:5432
+        options: --health-cmd="pg_isready -U postgres" --health-interval=10s --health-timeout=5s --health-retries=5
+
+    #praticar como configurar as variavies de ambiente na secrets do gitactions
+    env:
+      RAILS_ENV: test
+      DATABASE_NAME: phone_catalog_test_coverage
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: 4421
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
+
+    steps:
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential git libpq-dev libyaml-dev node-gyp pkg-config python-is-python3
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Set up Rails master key
+        run: echo "$RAILS_MASTER_KEY" > config/master.key
+        env:
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        continue-on-error: true
+
+      - name: Install Node.js dependencies
+        run: npm install
+
+      - name: Build JS with esbuild
+        run: npm run build
+
+      - name: Build CSS with Tailwind
+        run: npm run build:css || echo "No Tailwind CSS configured"
+
+      - name: Precompile assets
+        run: bin/rails assets:precompile
+
+      - name: Setup Database
+        run: |
+          bin/rails db:create
+          bin/rails db:migrate
+
+      - name: Run RSpec tests with color and documentation
+        run: bundle exec rspec --format documentation --color
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          files: coverage/.resultset.json
+          flags: rspec
+          name: codecov-rspec
+          fail_ci_if_error: true
+
+      - name: Upload screenshots from failed system tests (if any)
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: screenshots
+          path: tmp/screenshots
+          if-no-files-found: ignore
