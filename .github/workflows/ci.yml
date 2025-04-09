@@ -53,7 +53,7 @@ jobs:
     #praticar como configurar as variavies de ambiente na secrets do gitactions
     env:
       RAILS_ENV: test
-      DATABASE_NAME: phone_catalog_test_coverage
+      database: book_lend_test
       POSTGRES_USERNAME: postgres
       POSTGRES_PASSWORD: 4421
       POSTGRES_HOST: localhost
