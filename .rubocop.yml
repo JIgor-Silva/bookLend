@@ -119,11 +119,10 @@ Style/HashTransformValues:
   Enabled: true
 
 Style/MethodDefParentheses:
-  Enabled: true
-  EnforcedStyle: require_parentheses
+  Enabled: false
 
 Style/MethodCallWithArgsParentheses:
-  Enabled: true
+  Enabled: false
 
 Style/NestedParenthesizedCalls:
   Enabled: true
