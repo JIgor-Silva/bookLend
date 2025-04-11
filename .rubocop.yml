@@ -135,3 +135,9 @@ Style/ParallelAssignment:
 
 Style/SingleArgumentDig:
   Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Rails/StrongParametersExpect:
+  Enabled: false
