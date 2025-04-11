@@ -55,6 +55,7 @@ group :development, :test do
   gem "rubocop-capybara", require: false
   gem "rubocop-factory_bot", require: false
   gem "rubocop-rspec_rails", require: false
+  gem "rails-controller-testing"
 end
 
 group :development do
