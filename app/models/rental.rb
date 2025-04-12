@@ -2,8 +2,10 @@ class Rental < ApplicationRecord
   belongs_to :user
   belongs_to :book
 
-  after_create :mark_book_with_rented
-  after_update :mark_book_with_returned, if: :returned?
+  enum :status, { available: 0, rented: 1, returned: 2 }
+
+  after_create :mark_book_as_rented
+  after_update :mark_book_as_returned, if: :returned?
 
   private
 
