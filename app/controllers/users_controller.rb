@@ -21,6 +21,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         format.html { redirect_to books_path, notice: "Cadastro realizado" }
+        format.json { redirect_to books_path, status: :success }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
