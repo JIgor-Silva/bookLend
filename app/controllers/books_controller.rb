@@ -17,6 +17,11 @@
       @book = Book.find(params[:id])
     end
 
+    def book_rental
+      @books = Book.where(rented: :false)
+      render :book_rental
+    end
+
     def create
       @book = Book.new(book_params)
       respond_to do |format|

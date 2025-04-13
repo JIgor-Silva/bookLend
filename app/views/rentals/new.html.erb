@@ -31,10 +31,14 @@
               class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3 border",
               placeholder: "000.000.000-00" %>
         </div>
-
         <div class="pt-4">
           <%= f.submit "Alugar", 
               class: "w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out" %>
+        </div>
+
+        <div class="mt-1">
+          <%= link_to 'Voltar', books_path, 
+              class: "w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out text-center" %>
         </div>
       <% end %>
     </div>
