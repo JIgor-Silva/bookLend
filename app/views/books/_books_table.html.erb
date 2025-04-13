@@ -1,0 +1,34 @@
+<% if @books.present? %>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <% @books.each do |book| %>
+      <div class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-start">
+        <div class="w-24 h-36 bg-gray-300 mb-0 mr-4 flex-shrink-0">
+          <img src="<%= book.url_image_cover %>" alt="<%= book.title %> - Capa Frontal" class="w-full h-full object-cover rounded-md" />
+        </div>
+
+        <div class="flex flex-col justify-between h-full w-0 flex-grow">
+          <div class="space-y-2">
+            <div class="text-lg font-semibold text-gray-800"><%= book.title %></div>
+            <div class="text-sm text-gray-600">Autor: <%= book.author %></div>
+            <div class="text-sm text-gray-600 mb-1">Páginas: <%= book.pages %></div>
+            <div class="text-sm text-gray-600 truncate mb-1">Descrição: <%= book.description %></div>
+            <div class="text-sm text-gray-600">Disponível: <%= book.rented ? "Não" : "Sim" %></div>
+          </div>
+
+          <div class="mt-2 flex space-x-2 ml-[-7rem]">
+            <%= link_to 'Ver Livro', book_path(book), class: "py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 transition-all text-sm" %>
+            <%= link_to 'Editar', edit_book_path(book), class: "py-2 px-4 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition-all text-sm" %>
+            
+            <% if !book.rented %>
+              <%= link_to "Alugar", new_rental_path(book_id: book.id), class: "py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 transition-all text-sm" %>
+            <% else %>
+              <button class="py-2 px-4 bg-gray-400 text-white rounded cursor-not-allowed text-sm" disabled>Indisponível</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="text-center text-xl text-gray-500">Não há livros disponíveis para aluguel.</div>
+<% end %>
