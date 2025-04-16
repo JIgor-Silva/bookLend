@@ -10,6 +10,7 @@
         <%= link_to 'Cadastrar cliente', new_user_path, class: "block px-4 py-2 text-gray-800 hover:bg-gray-200" %>
         <%= link_to 'Ver Clientes', users_path, class: "block px-4 py-2 text-gray-800 hover:bg-gray-200" %>
         <%= link_to 'Livros Disponíveis', book_free_path, class: "block px-4 py-2 text-gray-800 hover:bg-gray-200" %>
+        <%= link_to 'Sair', destroy_user_session_path, method: :delete, data: { confirm: 'Tem certeza que deseja sair?' }, class: "block px-4 py-2 text-red-600 hover:bg-red-100" %>
       </div>
     </div>
   </nav>
