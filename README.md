@@ -1,186 +1,93 @@
 
-# 📚 Biblioteca Pública
+# 📚 Biblioteca Pública Online
+Sistema de aluguel de livros desenvolvido em Ruby on Rails 8. Os usuários podem consultar, cadastrar e alugar livros digitalmente. Ideal para bibliotecas públicas e centros educacionais.
 
-Aplicação web para gerenciamento de livros, usuários e empréstimos em uma biblioteca pública. Desenvolvido com Ruby on Rails 8 e PostgreSQL, com autenticação via Devise e cobertura de testes com RSpec.
 
----
+## Stack utilizada
 
-## ✅ Pré-requisitos
 
-Antes de começar, certifique-se de ter o seguinte instalado na sua máquina:
+**Back-end:**
+- **Ruby 3.2+ com `rbenv` ou `rvm`**
+- **PostgreSQL**
+- **Node.js + npm**
+- **Bundler (`gem install bundler`)**
+- **Git**
+**Front-end:**
+- **Rails 8.0+**
+- **TailwindCSS**
+## Instalação
 
-- Ruby 3.3.0+ (use \`rbenv\` ou \`rvm\` para gerenciar versões)
-- Rails 8.0.2+
-- PostgreSQL 12+
-- Node.js e Yarn ou npm
-- Git
-- Bundler (\`gem install bundler\`)
+### Clonar
 
----
+```bash
+    git clone https://github.com/JIgor-Silva/bookLend
+    cd <!-- IMPLEMENTAR AQUI: NOME_DO_REPOSITORIO -->
+```
 
-# 🚀 Instalação
+## Instale dependências   
+```bash
+   bundle install
+   npm install
+```
 
-## Clone o repositório
+# Prepare o banco de dados
+modifique 
+```bash
+  name  
+  passaword
+```
+no arquivo database.yml, apos isso abra o bash e digite o comando    
+```bash
+ bin/rails db:create db:migrate db:seed
 
-### bash
-### git clone https://github.com/JIgor-Silva/bookLend
+```                            
 
-### Instale as dependências
 
-\`\`\`bash
-bundle install
-\`\`\`
+# Inicie o servidor com hot reload e Tailwind
 
-Instale os pacotes JS/CSS:
+```bash
+ 
+  bin/dev
+```
+## Payload:
 
-\`\`\`bash
-bin/dev # ou use:
-npm install && npm run build
-\`\`\`
+```bash
+ {
+  "titulo": "Dom Casmurro",
+  "autor": "Machado de Assis",
+  "ano_publicacao": 1899,
+  "descricao": "Clássico da literatura brasileira"
+}
 
-### Configure o banco de dados
+```
 
-Edite o arquivo \`.env\` (ou \`config/database.yml\`) com suas credenciais PostgreSQL. Exemplo:
+## Testes
+```bash
+ 
+  RAILS_ENV=test bundle exec rspec
 
-\`\`\`env
-DB_USERNAME=seu_usuario
-DB_PASSWORD=sua_senha
-\`\`\`
+```
 
-Crie o banco:
+## Funcionalidades
 
-\`\`\`bash
-bin/rails db:create db:migrate
-\`\`\`
+- Preview em tempo real
+- Reponsivo
+- Implementação do modo de configuração por email
 
-Se necessário, rode os seeds:
 
-\`\`\`bash
-bin/rails db:seed
-\`\`\`
 
----
-
-## ▶️ Rodando a aplicação
-
-\`\`\`bash
-bin/dev
-\`\`\`
-
-Ou apenas:
-
-\`\`\`bash
-bin/rails server
-\`\`\`
-
-Acesse: [http://localhost:3000](http://localhost:3000)
-
----
-
-## 🧪 Rodando os testes
-
-Execute os testes com:
-
-\`\`\`bash
-bundle exec rspec
-\`\`\`
-
-Gere o relatório de cobertura com:
-
-\`\`\`bash
-COVERAGE=true bundle exec rspec
-\`\`\`
-
----
-
-## 🐳 Docker (opcional)
-
-Para rodar com Docker (futuramente com Kamal):
-
-\`\`\`bash
-docker build -t biblioteca_publica .
-docker run -p 3000:3000 biblioteca_publica
-\`\`\`
-
----
-
-## 🌱 Criando sua branch
-
-1. Certifique-se de estar na branch principal:
-
-\`\`\`bash
-git checkout main
-git pull
-\`\`\`
-
-2. Crie uma nova branch com a convenção:
-
-\`\`\`
-git checkout -b tipo(metodo-modelo)-local-da-feature-TASK-00
-\`\`\`
-
-Exemplos:
-- \`feat(create-Livro)-model-TASK-01\`
-- \`fix(update-Emprestimo)-controller-TASK-02\`
-
----
-
-## ✅ Fazendo commits
-
-Utilize mensagens claras e padronizadas:
-
-\`\`\`bash
-git commit -m "feat(api-create-LivroService)-TASK-03"
-\`\`\`
-
----
-
-## 🚀 Subindo sua branch
-
-\`\`\`bash
-git push origin nome-da-sua-branch
-\`\`\`
-
-Abra um **Pull Request** no GitHub!
-
----
-
-## 🐞 Corrigindo bugs
-
-1. Atualize sua branch \`main\`:
-
-\`\`\`bash
-git checkout main
-git pull
-\`\`\`
-
-2. Crie a branch de correção com prefixo \`fix\`:
-
-\`\`\`bash
-git checkout -b fix(nome-da-feature)-TASK-0X
-\`\`\`
-
-3. Faça as alterações e siga o fluxo de commit/push/PR normalmente.
-
----
 
 ## 🤝 Contribuindo
+Contribuições são sempre bem-vindas!
 
-1. Faça um fork do projeto.
-2. Crie uma branch (\`git checkout -b minha-feature\`)
-3. Commit suas mudanças (\`git commit -m 'feat: minha nova feature'\`)
-4. Push para o seu fork (\`git push origin minha-feature\`)
-5. Abra um Pull Request.
+Por favor, siga o `código de conduta` desse projeto.
 
----
+    Fork este repositório
 
-## 📚 Tecnologias e Ferramentas
+    Crie sua branch (git checkout -b feat/minha-feature-TASK-001)
 
-- Ruby on Rails 8
-- PostgreSQL
-- Devise (autenticação)
-- RSpec, FactoryBot, Faker (testes)
-- Tailwind CSS (via cssbundling)
-- Rubocop + SimpleCov
-- Git e GitHub
-EOF
+    Commit (git commit -m "feat(aluguel-controller-TASK-001): adiciona aluguel")
+
+    Push (git push origin feat/minha-feature-TASK-001)
+
+    Abra um Pull Request na branch main
